@@ -1,0 +1,17 @@
+name: Sync to GrowthBook
+on:
+  push:
+    branches:
+      - main
+jobs:
+  growthbook_sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - name: Sync to GrowthBook
+        run: |
+          npm install yaml
+          GB_API_KEY="${{secrets.GB_API_KEY}}" node growthbook_sync.mjs
