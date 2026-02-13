@@ -1,0 +1,27 @@
+factTables:
+  - id: orders
+    data:
+      name: Orders
+      datasource: ds_1e5xq8mommlk66azv
+      userIdTypes:
+        - user_id
+      sql: >
+        SELECT
+          userId as user_id,
+          amount,
+          received_at as timestamp
+        FROM orders
+factMetrics:
+  - id: purchased
+    data:
+      name: Purchased
+      metricType: proportion
+      numerator:
+        factTableId: orders
+  - id: revenue
+    data:
+      name: Revenue
+      metricType: mean
+      numerator:
+        factTableId: orders
+        column: amount
